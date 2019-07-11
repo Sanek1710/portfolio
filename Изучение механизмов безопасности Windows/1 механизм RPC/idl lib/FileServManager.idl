@@ -1,0 +1,22 @@
+[
+	uuid(2f651b8c-0af2-44d2-81b9-3797b94cba6c),
+	version(1.0),
+	implicit_handle(handle_t hFileServManager)
+]
+interface FileServManager
+{
+	int	//return 1 - success, 0 - else
+	delete_file([in, string]const char *filename);
+
+	int //return 1 - success, 0 - else
+	upload_file([in, string]const unsigned char *filename, [in]const char filebuf[1025], [in]int write_size);
+
+	long long //return size of file
+	size_of_file([in, string]const char *filename);
+
+	int //return 1 - success, 0 - else
+	save_file([in, string]const char *filename, [out]char filebuf[1025], [in]int offset_1024, [in]int read_size);
+
+	int //return error_code
+	login([in, string]const unsigned char *username, [in, string]const unsigned char *password);
+}

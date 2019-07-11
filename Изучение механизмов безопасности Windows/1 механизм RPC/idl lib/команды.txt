@@ -1,0 +1,5 @@
+uuidgen -i -omy_int.idl
+
+midl /app_config my_int.idl
+
+midl /app_config collector.idl

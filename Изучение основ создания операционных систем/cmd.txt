@@ -1,0 +1,20 @@
+загрузчик:
+
+yasm -p gas -f bin -o bootsect.tmp bootsect.asm
+
+dd bs=31744 skip=1 if=bootsect.tmp of=bootsect.bin
+
+
+ядро:
+
+cl /GS- /c kernel.cpp
+
+link /OUT:kernel.bin /BASE:0x10000 /FIXED /FILEALIGN:512 /MERGE:.rdata=.data /IGNORE:4254 /NODEFAULTLIB /ENTRY:kmain /SUBSYSTEM:NATIVE kernel.obj
+
+dumpbin /headers kernel.bin
+
+
+потом переместить bootsect.bin и kernel.bin в папку с qemu
+запуск ОС (из папки с qemu):
+
+qemu-system-i386 -fda bootsect.bin -fdb kernel.bin

@@ -1,0 +1,11 @@
+c = 5;
+b = 4;
+if(c > b)
+{
+  print c;
+}
+else
+{ 
+  print b;
+}
+return;
